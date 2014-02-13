@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.min.css"/>
+      
+  </head>
+  <body>
+    <!-- Header Menu-->
+    <% include header.html %>
+    
+      
+    <div class="container">
+      <div class="row-fluid" style="margin-top:70px;">
+        <div class="col-lg-7">
+          <img src="/images/ab07.jpg" alt ="Address Book">
+        </div>
+        <div class="col-lg-4 col-lg-offset-1">
+          <div class="row-fluid" style="margin-top:70px;">
+            <div class="col-lg-12 well"><header>Members Area</header>
+            </div>
+            <div class="row-fluid">
+              <div class="col-lg-12">
+                <div id="errmessage"><%= err %></div>
+                <form role="form" method="post" action="/">
+                  <div class="form-group" id="guserid">
+                    <label for="userid">User Id</label>
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="Enter user id">
+                    <div class="text-danger" id="erruserid"></div>
+                  </div>
+                  <div class="form-group" id="gpassword">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="tpassword" name="tpassword" placeholder="Enter password">
+                    <div class="text-danger" id="errpassword"></div>
+                  </div>
+                  <button type="button" id="signin" class="btn btn-primary">Sign in</button>
+                </form>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="col-lg-12" style="margin-top:20px;">
+                <a class="btn btn-success" href="/signup">Sign up now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer menu-->
+    <% include footer.html %>      
+    <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+      <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(e) {
+          if($('#errmessage').html()!=''){
+            var msg=$('#errmessage').html();
+            $('#errmessage').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+msg);
+            $('#errmessage').addClass('alert alert-danger alert-dismissable');
+          }
+        
+          $('#userid').focusout(function(e){
+            validateUserid();
+          });
+        
+          $('#tpassword').focusout(function(e){
+            validateTPassword();
+          });
+          
+          $('#signin').click(function(e){
+            if(validateUserid()==true && validateTPassword()==true)
+              $('form').submit();
+            
+          });
+          
+          function validateUserid(){
+            if($('#userid').val().trim()==""){
+              $('#erruserid').html("You can't left this field empty");
+              $('#guserid').removeClass('has-success').addClass('has-error');
+              return false;
+            }
+            else{
+              $('#erruserid').html("");
+              $('#guserid').removeClass('has-error').addClass('has-success');
+            }
+            return true;
+          }
+          
+          function validateTPassword(){
+            if($('#tpassword').val().trim()==""){
+              $('#errpassword').html("You can't left this field empty");
+              $('#gpassword').removeClass('has-success').addClass('has-error');
+              return false;
+            }
+            else{
+              $('#errpassword').html("");
+              $('#gpassword').removeClass('has-error').addClass('has-success');
+            }
+            return true;
+          }
+        });
+    </script>
+    
+  </body>
+</html>
