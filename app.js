@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var contacts = require('./routes/contacts');
 var http = require('http');
 var path = require('path');
 
@@ -38,6 +39,8 @@ app.post('/',routes.signin);
 app.get('/signup', user.signupform);
 app.post('/signup',user.adduser);
 app.get('/userhome', user.userhome);
+app.get('/signout', user.signout);
+app.get('/contacts', contacts.allcontacts);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Addressbook server listening on port ' + app.get('port'));

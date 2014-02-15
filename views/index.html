@@ -22,7 +22,7 @@
             <div class="row-fluid">
               <div class="col-lg-12">
                 <div id="errmessage"><%= err %></div>
-                <form role="form" method="post" action="/">
+                <form role="form" method="post">
                   <div class="form-group" id="guserid">
                     <label for="userid">User Id</label>
                     <input type="text" class="form-control" id="userid" name="userid" placeholder="Enter user id">
@@ -33,7 +33,7 @@
                     <input type="password" class="form-control" id="tpassword" name="tpassword" placeholder="Enter password">
                     <div class="text-danger" id="errpassword"></div>
                   </div>
-                  <button type="button" id="signin" class="btn btn-primary">Sign in</button>
+                  <input type="button" value="Sign in" id="signin" class="btn btn-primary">
                 </form>
               </div>
             </div>

@@ -24,6 +24,8 @@ exports.signin= function(req, res){
       else{
         if(password==rows.password){
           req.session.userid=userid;
+          req.session.uname= rows.uname;
+          req.session.country=rows.country;
           res.redirect('/userhome');
         }
         else

@@ -35,4 +35,25 @@ Users.prototype.getUser = function(userid,callback){
 	});
 };
 
+//************************************************
+//		Contacts functions
+//************************************************
+
+Contacts=function(){
+  con=new DBConnection();
+};
+
+Contacts.prototype.getAllContacts = function(callback){
+  con.connect(function(err, db){
+    if(err) callback(err);
+    else{
+      db.contacts.find().toArray(function(error, rows){
+		  if(error) callback(error);
+		  else callback(null, rows);
+	  });
+    }
+  });
+};
+
 exports.Users=Users;
+exports.Contacts=Contacts;

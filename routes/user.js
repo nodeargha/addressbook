@@ -29,5 +29,10 @@ exports.adduser= function(req,res){
 };
 
 exports.userhome = function(req, res){
-  res.end("Welcome "+req.session.userid);
+  res.render('userhome', { title:'Home', uname: req.session.uname, country: req.session.country});
+};
+
+exports.signout = function(req, res){
+  req.session.destroy;
+  res.redirect('/');
 };
