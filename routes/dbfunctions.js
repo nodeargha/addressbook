@@ -43,14 +43,29 @@ Contacts=function(){
   con=new DBConnection();
 };
 
-Contacts.prototype.getAllContacts = function(callback){
+Contacts.prototype.getAllContacts = function(userid, callback){
   con.connect(function(err, db){
     if(err) callback(err);
     else{
-      db.contacts.find().toArray(function(error, rows){
+      var criteria={_id: userid};
+      db.contacts.find(criteria).toArray(function(error, rows){
 		  if(error) callback(error);
 		  else callback(null, rows);
 	  });
+    }
+  });
+};
+
+Contacts.prototype.insertContact = function(insertData, callback){
+  con.connect(function(err, db){
+    if(err)callback(err);
+    else{
+      if(typeof(insertData)=='undefined')
+        insertData=[insertData];
+      db.contacts.insert(insertData,function(error,info){
+        if(error) callback(error);
+        else callback(null, info);
+      });
     }
   });
 };
